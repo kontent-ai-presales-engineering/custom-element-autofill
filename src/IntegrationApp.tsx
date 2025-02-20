@@ -30,7 +30,7 @@ export const IntegrationApp = () => {
         const type = elements?.[config.sourceElement]?.type; // Correct element access
         setElement(environmentId, variant.id, value, type ?? null, name, item.codename, config);
       })
-  , 4000);
+  , 1000);
 
   useEffect(() => {
     if (!watchedElements) {
