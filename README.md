@@ -1,6 +1,6 @@
-# Unique URL slug
+# Auto fill
 
-This is a [custom element](https://kontent.ai/learn/docs/custom-elements) for [Kontent by Kentico](https://kontent.ai) that generates a URL slug based on a text field or a custom value. It also checks for uniqueness of such value and can generate a unique value if the same URL slug is found.
+This is a [custom element](https://kontent.ai/learn/docs/custom-elements) for [Kontent by Kentico](https://kontent.ai) that generates auto fills element based on another element or the name of content item. 
 
 ![Screenshot of custom element](customurlslug.gif)
 
@@ -32,7 +32,7 @@ Netlify has made this easy. If you click the deploy button below, it will guide 
 
 ## JSON Parameters
 
-You need to specify the `repeater` URL, `generates_from` and `codename` parameters in order to make the element work. There are also optional `force_uniqueness` and `restricted_chars` parameters:
+You need to specify the `repeater` URL, `generates_from`, and `codename` parameters to make the element work. The `config_name` element is where the content item name will be filled in. Additionally, you can use the `source` and `target` parameters to copy values from one element to another. There are also optional `force_uniqueness` and `restricted_chars` parameters:
 
 ```json
 {
@@ -43,18 +43,14 @@ You need to specify the `repeater` URL, `generates_from` and `codename` paramete
   "managementApiKey": "your_management_api_key"
 }
 ```
-```
-  - `repeater` -> A [URL of a service](https://kontent.ai/learn/develop/integrate/worked-examples/sensitive-data-in-custom-elements) you host on your server and that forwards JSON from Preview API based on "/items?elements.<url_slug_codename>[contains]=<url_slug_value>&depth=0" query
-  - `generates_from` -> A codename of a source Text element you want your url slug to be generated from
-  - `codename` -> A codename of your Custom URL Slug element (same codename across all types you want to check the uniqueness for)
-  - `force_uniqueness` -> A true/false value that generates extra postfix to the url slug value in case the url slug is not unique
-  - `restricted_chars` -> A set of characters (RegEx) you want the url slug to be restricted to
+  - `nameElement` -> The codename of the element where the content item name will be filled in.
+  - `sourceElement` -> The codename of the source text or richt text element from which the value will be used for the target element.
+  - `targetElement` -> The codename of the target text or richt text element element where the value will be filled in of the source element.
+  - `previewApiKey` -> Your Preview API key.
+  - `managementApiKey` -> Your Management API key.
 
 ## Security
 
-Since custom element code needs to be publicly accessible, you can't call Preview API directly due to Preview token exposure. You need to create your own server repeater that checks the origin, asks Preview API with the token and returns data back.
+### Warning
 
-## Disclamer
-
-With this custom element you can't use `URLslug` macro in Preview urls. Please use `ItemId` or `Codename` macros instead.
-
+Never store your API keys or any other sensitive data in the JSON parameters field. It's not secure! Use server-side proxy to store sensitive data. Refer to the [Kontent.ai documentation](https://kontent.ai/learn/docs/custom-elements#a-3--displaying-a-custom-element-in-kentico-kontent) for more details on how to securely manage your API keys and other sensitive information.
