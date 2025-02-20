@@ -2,7 +2,7 @@
 
 This is a [custom element](https://kontent.ai/learn/docs/custom-elements) for [Kontent by Kentico](https://kontent.ai) that generates auto fills element based on another element or the name of content item. 
 
-![Screenshot of custom element](customurlslug.gif)
+![Screenshot of custom element](autofill.gif)
 
 # Getting Started
 
